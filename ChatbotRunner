@@ -5,10 +5,12 @@ public class ChatbotRunner
 	{
 		Chatbot chatty = new Chatbot();
 		
-		System.out.println (Chatbot.getGreeting());
+		System.out.println (chatty.getGreeting());
 		Scanner in = new Scanner (System.in);
 		String statement = in.nextLine();
-		
+		System.out.println ("That's awesome! It's very nice to meet you. My name's Chatty! What do you like to do, or do you have family?");
+			statement = in.nextLine();
+
 		while (!statement.equals("Bye"))
 		{
 			System.out.println (chatty.getResponse(statement));
