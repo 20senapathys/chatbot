@@ -3,7 +3,7 @@ public class Chatbot
 {
 		public String getGreeting()
 	{
-		return "Hey, there!";
+		return "Hey, there! Tell me a little about yourself. What's your name?";
 	}
 		public String getResponse(String statement)
 	{
@@ -19,11 +19,24 @@ public class Chatbot
 		}
 		else if (findKeyword(statement, "mother") >= 0
 				|| findKeyword(statement, "father") >= 0
+        || findKeyword(statement, "mom") >= 0
+        || findKeyword(statement, "dad") >= 0
 				|| findKeyword(statement, "sister") >= 0
 				|| findKeyword(statement, "brother") >= 0)
 		{
-			response = "Tell me more about your family.";
+			response = "Sounds cool! Do you have any pets?";
 		}
+
+    else if (findKeyword(statement, "dog") >= 0
+				|| findKeyword(statement, "cat") >= 0
+        || findKeyword(statement, "iguana") >= 0
+        || findKeyword(statement, "turtle") >= 0
+				|| findKeyword(statement, "fish") >= 0
+				|| findKeyword(statement, "pet") >= 0)
+		{
+			response = "Nice! I would like a pet, too, but I have no way to feed it!";
+
+    }
 
 		else if (findKeyword(statement, "I want to", 0) >= 0)
 		{
@@ -34,6 +47,10 @@ public class Chatbot
 			response = transformIWantStatement(statement);
 		}
 
+    else if (findKeyword(statement, "I like to", 0) >= 0)
+    {
+      response = transformILikeStatement(statement);
+    }
 		else
 		{
 			int psn = findKeyword(statement, "you", 0);
@@ -60,7 +77,20 @@ public class Chatbot
 		}
 		return response;
 	}
-	
+	private String transformILikeStatement(String statement)
+	{
+    statement = statement.trim();
+    String lastChar = statement.substring(statement
+				.length() - 1);
+		if (lastChar.equals("."))
+		{
+			statement = statement.substring(0, statement
+					.length() - 1);
+		}
+		int psn = findKeyword (statement, "I like to", 0);
+		String restOfStatement = statement.substring(psn + 9).trim();
+		return "Why do you like to " + restOfStatement + " ?";
+  }
 		private String transformIWantToStatement(String statement)
 	{
 		statement = statement.trim();
@@ -173,9 +203,9 @@ public class Chatbot
 	
 	private String [] randomResponses = {"Interesting, tell me more",
 			"Hmmm.",
-			"Do you really think so?",
-			"You don't say."
-			"Okay."
+			"Sounds awesome!",
+			"Cool!",
+			"Okay.",
 			"Can you repharase that?"
 
 	};
