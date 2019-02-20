@@ -1,0 +1,19 @@
+import java.util.Scanner;
+public class ChatbotRunner
+{
+	public static void main(String[] args)
+	{
+		Chatbot chatty = new Chatbot();
+		
+		System.out.println (Chatbot.getGreeting());
+		Scanner in = new Scanner (System.in);
+		String statement = in.nextLine();
+		
+		while (!statement.equals("Bye"))
+		{
+			System.out.println (chatty.getResponse(statement));
+			statement = in.nextLine();
+		}
+	}
+
+}
